@@ -20,6 +20,17 @@
     (progn
       (pdf-tools-install)
 
+      (setq-default pdf-view-display-size 'fit-page
+                    pdf-view-midnight-colors `(,(face-attribute 'default :foreground) .
+                                               ,(face-attribute 'default :background)))
+;;      (add-hook 'pdf-view-mode-hook
+;;                (lambda ()
+;;                  (setq-default pdf-view-midnight-colors `(,(face-attribute 'default :foreground) .
+;;                                                           ,(face-attribute 'default :background)))))
+;;      (when (eq frame-background-mode 'dark)
+      (add-hook 'pdf-view-mode-hook
+                'pdf-view-midnight-minor-mode)
+
       (spacemacs|define-transient-state pdf-tools
         :title "PDF-tools Transient State"
         :on-enter (setq which-key-inhibit t)
